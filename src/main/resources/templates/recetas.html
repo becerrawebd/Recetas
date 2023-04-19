@@ -14,10 +14,10 @@
         <h1>Lista de recetas</h1>
         <ul class="list-group" th:if="${!recetas.isEmpty()}">
             <li class="list-group-item d-flex justify-content-between align-items-center" th:each="receta: ${recetas}">
-                <div>
+                <a th:href="${'/recetas/'+ receta.getId()}" class="text-decoration-none">
                     <h5 class="mb-1" th:text="${receta.getNombre()}"></h5>
-                    <small class="text-body-secondary" th:text="${receta.getDate().toString()}">3 days ago</small>
-                </div>
+                    <small class="text-body-secondary" th:text="${receta.getDate().toString()}"></small>
+                </a>
 
                 <div>
                         <button class="btn btn-primary">Editar</button>
@@ -26,6 +26,7 @@
             </li>
         </ul>
         <h2 th:if="${recetas.isEmpty()}">No hay recetas para mostrar!</h2>
+        <a class="btn btn-primary mt-3" href="/nuevaReceta">Crear nueva receta</a>
     </div>
 </body>
 </html>
