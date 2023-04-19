@@ -8,16 +8,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class HomeController {
     @Autowired
     private RecetaService recetaService;
-    @GetMapping("/")
-    public String saludar(){
-        return "saludo";
+
+    @GetMapping("/recetas")
+    public String obtenerRecetas(@RequestParam(name = "pagina", required = false) Integer pagina, Model model){
+        if(pagina == null){
+            return "redirect:/recetas?pagina=0";
+        }
+        List<Receta> recetas = recetaService.obtenerRecetas(pagina, 20);
+        model.addAttribute("recetas",recetas);
+        return "recetas";
     }
     @GetMapping("/nuevaReceta")
     public String formularioCrearReceta(Model model){
@@ -34,6 +43,7 @@ public class HomeController {
                 .date(new Date())
                 .build();
         recetaService.crearReceta(receta);
-        return "saludo";
+        return "redirect:/recetas?pagina=0";
     }
+
 }
