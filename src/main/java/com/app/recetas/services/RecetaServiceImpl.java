@@ -12,13 +12,7 @@ public class RecetaServiceImpl implements RecetaService{
     @Autowired
     private RecetaRepository recetaRepository;
     @Override
-    public void crearReceta(String nombre, String ingredientes, String preparacion) {
-        Receta receta = Receta.builder()
-                .nombre(nombre)
-                .ingredientes(ingredientes)
-                .preparacion(preparacion)
-                .date(new Date())
-                .build();
+    public void crearReceta(Receta receta) {
         recetaRepository.save(receta);
     }
 }
