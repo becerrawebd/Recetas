@@ -8,4 +8,6 @@ public interface RecetaService {
     void crearReceta(Receta receta);
 
     List<Receta> obtenerRecetas(Integer pagina, Integer cantidadResultados);
+
+    Receta obtenerReceta(Long id);
 }
