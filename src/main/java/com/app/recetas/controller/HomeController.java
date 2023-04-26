@@ -41,4 +41,11 @@ public class HomeController {
         recetaService.crearReceta(receta);
         return "redirect:/recetas?pagina=0";
     }
+
+    @GetMapping("/recetas/{id}")
+    public String obtenerReceta(@PathVariable Long id, Model model){
+        Receta receta = recetaService.obtenerReceta(id);
+        model.addAttribute("receta", receta);
+        return "receta";
+    }
 }
